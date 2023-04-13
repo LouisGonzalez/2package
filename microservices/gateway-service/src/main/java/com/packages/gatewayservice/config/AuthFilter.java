@@ -47,6 +47,6 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
         return response.setComplete();
     }
 
-    public static class Config ()
+    public static class Config {}
 
 }

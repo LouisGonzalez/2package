@@ -29,7 +29,7 @@ public class JwtProvider {
         claims.put("id", authUser.getId());
         Date now = new Date();
         Date exp = new Date(now.getTime() + 3600000);
-        return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(exp).signWith(SignatureAlgorithm.ES256, secret).compact();
+        return Jwts.builder().setClaims(claims).setIssuedAt(now).setExpiration(exp).signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
     public boolean validate(String token) {
