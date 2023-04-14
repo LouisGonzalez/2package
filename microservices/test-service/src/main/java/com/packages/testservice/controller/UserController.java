@@ -1,6 +1,6 @@
 package com.packages.testservice.controller;
 
-import com.packages.testservice.entity.User;
+import com.packages.testservice.entity.UserTest;
 import com.packages.testservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +16,22 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        List<User> users = userService.getlAll();
+    public ResponseEntity<List<UserTest>> getAll() {
+        List<UserTest> users = userService.getlAll();
         if(users.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable("id") int id) {
-        User user = userService.getUserById(id);
+    public ResponseEntity<UserTest> getById(@PathVariable("id") int id) {
+        UserTest user = userService.getUserById(id);
         if(user == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public ResponseEntity<User> save(@RequestBody User user) {
-        User userNew = userService.save(user);
+    public ResponseEntity<UserTest> save(@RequestBody UserTest user) {
+        UserTest userNew = userService.save(user);
         return ResponseEntity.ok(userNew);
     }
 
