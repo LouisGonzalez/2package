@@ -28,8 +28,11 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> 
                return onError(exchange, HttpStatus.BAD_REQUEST);
             String tokenHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String [] chunks = tokenHeader.split(" ");
-            if(chunks.length != 2 || !chunks[0].equals("Bearer"))
+            System.out.println("entro aqui :D" + chunks[0] + chunks[1]);
+            if(chunks.length != 2 || !chunks[0].equals("Bearer")){
+                System.out.println(" error en el bearer");
                 return onError(exchange, HttpStatus.BAD_REQUEST);
+            }
             return webClient.build()
                     .post()
                     .uri("http://auth-service/auth/validate?token="+chunks[1])
