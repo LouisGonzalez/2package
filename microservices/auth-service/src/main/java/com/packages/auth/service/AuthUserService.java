@@ -42,6 +42,7 @@ public class AuthUserService {
     public TokenDto validate(String token){
         if(!jwtProvider.validate(token)) return null;
         String username = jwtProvider.getUserNameFromToken(token);
+        System.out.printf(username);
         if(!authUserRepository.findByUsername(username).isPresent())
             return null;
         return new TokenDto(token);
