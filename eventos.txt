@@ -1,0 +1,35 @@
+1) Enviar Paquete
+paquetesService -> rutasService
+
+2)Localizar Paquete
+usaurioService -> paquetesService -> rutasService
+
+3) Pagar Paquete
+pagosService-> paquetesService
+
+4) Mover Paquete a CheckPoint Inicial
+rutasService-> checkpointsService
+
+5) Recibir Paquete
+usuario -> paquetesService
+            rutasService
+
+6) Creacion de Ruta
+rutasService-> checkpointsService
+
+7) LLegar Destino
+checkpointsService-> usaurioService
+                     rutasService
+
+8) Reportar Paquete Danado
+checkpointsService -> usaurioService
+                        paquetesService
+
+9) Mover paquete entre CheckPoints
+checkpointsService -> rutasService
+
+10) Verificar Siguiente CheckPoint
+checkpointsService -> rutasService
+
+
+
