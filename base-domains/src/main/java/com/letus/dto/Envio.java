@@ -1,4 +1,5 @@
-package com.letus.paquetesservice.dto;
+package com.letus.dto;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

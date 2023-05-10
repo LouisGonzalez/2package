@@ -1,4 +1,4 @@
-package com.letus.basedomains.dto;
+package com.letus.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
