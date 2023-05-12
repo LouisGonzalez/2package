@@ -9,8 +9,10 @@ public class Paquete {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+    
     private int userId;
     
+
     private int rutaId;
     
     private String status;
@@ -35,6 +37,10 @@ public class Paquete {
         this.id = id;
         this.userId = userId;
         this.rutaId = rutaId;
+        this.status = status;
+    }
+    public Paquete(int userId, String status) {
+        this.userId = userId;
         this.status = status;
     }
 
