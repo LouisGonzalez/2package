@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: auth-service
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8081
+  data:
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+
+jwt:
+  secret: secret
+
+
+admin-paths:
+  paths:
+    -
+      uri: "/user"
+      method: "POST"
+    -
+      uri: "/user/savecar/{1}[1-9]+[0-9]*"
+      method: "POST"
+    -
+      uri: "/user"
+      method: "GET"
