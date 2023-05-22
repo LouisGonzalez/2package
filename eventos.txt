@@ -7,7 +7,7 @@ paquetesService -> rutasService
 usaurioService -> paquetesService -> rutasService
 
 3) Pagar Paquete
-pagosService-> paquetesService
+pagosService-> paquetesService (usuarioService)
 (int userId, int packageId, Float amount, Date date, Long cardNumber
     int cvv, String cardName, String expDate)
 
@@ -15,6 +15,7 @@ pagosService-> paquetesService
 
 4) Mover Paquete a CheckPoint Inicial
 rutasService-> checkpointsService
+(int packageId)
 
 5) Recibir Paquete
 usuario -> paquetesService
@@ -22,6 +23,7 @@ usuario -> paquetesService
 
 6) Creacion de Ruta
 rutasService-> checkpointsService
+
 
 7) LLegar Destino
 checkpointsService-> usaurioService
@@ -37,5 +39,8 @@ checkpointsService -> rutasService
 10) Verificar Siguiente CheckPoint
 checkpointsService -> rutasService
 
+
+Tests Integration - Unitario
+Exceptiones
 
 

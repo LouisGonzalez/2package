@@ -25,6 +25,10 @@ public class Ruta {
 	@Size(max = 50)
 	private String finish;
 
+    private float price;
+
+    private int numberOfDays;
+
 
     @OneToMany(mappedBy = "ruta")
 	List<CheckPoint> checkpoints;
@@ -58,8 +62,26 @@ public class Ruta {
             
         
     }
+    
+
+    public Ruta(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 50) String start,
+            @NotBlank @Size(max = 50) String finish, float price, int numberOfDays) {
+        this.name = name;
+        this.start = start;
+        this.finish = finish;
+        this.price = price;
+        this.numberOfDays = numberOfDays;
+    }
 
     public Ruta() {
+    }
+
+    public void setCheckpoints(List<CheckPoint> checkpoints) {
+        this.checkpoints = checkpoints;
+    }
+
+    public void setPaquetes(Set<Paquete> paquetes) {
+        this.paquetes = paquetes;
     }
 
     

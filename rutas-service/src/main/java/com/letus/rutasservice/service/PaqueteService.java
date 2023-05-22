@@ -16,7 +16,7 @@ public class PaqueteService {
     RutaRepository retuRepository;
 
     public Paquete inicializePackage(Envio envio){
-        Paquete newPaquete= new Paquete((long)envio.getPackageId(), 1,
+        Paquete newPaquete= new Paquete((long)envio.getPackageId(), 0,
         retuRepository.getById((long)envio.getRutaId()));
         return paqueteRepository.save(newPaquete);
     }

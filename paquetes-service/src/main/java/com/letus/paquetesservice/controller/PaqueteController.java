@@ -29,6 +29,11 @@ public class PaqueteController {
         this.envioProducer = envioProducer;
     }
 
+    @GetMapping("/get-paquetes")
+    public List<Object[]> getPaquetes() {
+        return paqueteService.getPaquetes();
+    }
+
     
 
     @PostMapping("/enviar")

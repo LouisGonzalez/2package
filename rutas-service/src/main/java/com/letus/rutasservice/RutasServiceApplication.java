@@ -9,5 +9,5 @@ public class RutasServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RutasServiceApplication.class, args);
 	}
-
+	
 }

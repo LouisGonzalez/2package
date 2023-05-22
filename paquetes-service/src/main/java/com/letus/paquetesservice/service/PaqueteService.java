@@ -30,6 +30,10 @@ public class PaqueteService {
         return null;
     }
 
+    public List<Object[]> getPaquetes(){
+       return paqueteRepository.findAllPaquetes();
+    }
+
     public void createPackage(){
         Paquete paquete= new Paquete((long)1,1,1,"PAID");
         paqueteRepository.save(paquete);
