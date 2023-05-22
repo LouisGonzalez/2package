@@ -1,9 +1,12 @@
 package com.letus.pagosservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,11 @@ public class PagoController {
     public ResponseEntity<?> placeOrder(@RequestBody PagoDTO pago){
         String validate = pagoService.validatePago(pago, pagosProducer);
         return new ResponseEntity<String>(validate, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-pagos")
+    public List<Object[]> getPagos() {
+        return pagoService.getPaquetes();
     }
 
 }

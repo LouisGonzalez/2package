@@ -11,6 +11,8 @@ public class Paquete {
     @NotBlank
     private int checkpointNumberLocation;
 
+    private int checkpointDestination;
+
     public Paquete(Long id, @NotBlank int checkpointNumberLocation) {
         this.id = id;
         this.checkpointNumberLocation = checkpointNumberLocation;
@@ -28,5 +30,6 @@ public class Paquete {
 
     public Paquete() {
     }
+
 
 }
