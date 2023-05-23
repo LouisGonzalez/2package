@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.letus.dto.Checkpoint;
+import com.letus.dto.MoverEvent;
 import com.letus.rutasservice.dto.CheckPointDTO;
+import com.letus.rutasservice.dto.MoverDTO;
 import com.letus.rutasservice.dto.RutaDTO;
 import com.letus.rutasservice.model.CheckPoint;
 import com.letus.rutasservice.model.Paquete;
@@ -21,9 +23,12 @@ public class RutaService {
     RutaRepository rutaRepository;
     @Autowired 
     CheckpointRepository checkpointRepository;
+    @Autowired
+    PaqueteService paqueteService;
 
     public Ruta enviarPaquete(Long idRuta, Paquete paquete){
-        Ruta ruta = rutaRepository.getById(idRuta);
+        Ruta ruta = rutaRepository.findById(idRuta)
+        .orElseThrow(() -> new RuntimeException("Error: Ruta not found"));
         ruta.addPaquete(paquete);
         Ruta updatedRuta = rutaRepository.save(ruta);
         return updatedRuta;
@@ -46,6 +51,19 @@ public class RutaService {
     public List<Object[]> getRutas(){
         return rutaRepository.findAllRutas();
      }
+
+    public MoverEvent moverPaquete(MoverDTO moverDTO){
+        Paquete paquete = paqueteService.movePackageInicial(moverDTO.getPackageId());
+        MoverEvent moverEvent = new MoverEvent();
+        moverEvent.setStatus("PENDING");
+        moverEvent.setMessage("order status is in pending state");
+        moverEvent.setPackageId(moverDTO.getPackageId());
+        moverEvent.setDate(moverDTO.getDate());
+        moverEvent.setToCheckPointId(paquete.getRuta().getCheckpoints().get(0).getId().intValue());
+        moverEvent.setDestinationId(paquete.getRuta().getLastId());
+        moverEvent.setNextPointId(paquete.getRuta().getNextId(0));
+        return moverEvent;
+    }
 
     public List<CheckPoint> createRuta(RutaDTO rutaDTO){
         Ruta ruta = new Ruta(rutaDTO.getName(), rutaDTO.getStart(), rutaDTO.getFinish(),

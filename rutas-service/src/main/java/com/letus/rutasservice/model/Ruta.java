@@ -84,6 +84,48 @@ public class Ruta {
         this.paquetes = paquetes;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getFinish() {
+        return finish;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public int getNumberOfDays() {
+        return numberOfDays;
+    }
+
+    public List<CheckPoint> getCheckpoints() {
+        return checkpoints;
+    }
+
+    public Set<Paquete> getPaquetes() {
+        return paquetes;
+    }
+    public int getLastId(){
+        return checkpoints.get(checkpoints.size()-1).getId().intValue();
+    }
+
+    public int getNextId(int num){
+        if (num==checkpoints.size()-1) {
+            return checkpoints.get(num).getId().intValue();
+        }else{
+            return checkpoints.get(num+1).getId().intValue();
+        }
+    }
     
     
 

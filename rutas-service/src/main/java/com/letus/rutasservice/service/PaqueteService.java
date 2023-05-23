@@ -18,6 +18,15 @@ public class PaqueteService {
     public Paquete inicializePackage(Envio envio){
         Paquete newPaquete= new Paquete((long)envio.getPackageId(), 0,
         retuRepository.getById((long)envio.getRutaId()));
-        return paqueteRepository.save(newPaquete);
+        paqueteRepository.save(newPaquete);
+        return newPaquete;
+    }
+
+    public Paquete movePackageInicial(int packageId){
+        Paquete paquete= paqueteRepository.findById((long)packageId)
+            .orElseThrow(() -> new RuntimeException("Error: Paquete not found"));
+        paquete.setCheckpointNumberLocation(1);
+        paqueteRepository.save(paquete);
+        return paquete;
     }
 }

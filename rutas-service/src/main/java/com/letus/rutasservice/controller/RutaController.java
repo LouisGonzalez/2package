@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.letus.dto.Checkpoint;
 import com.letus.dto.CheckpointEvent;
+import com.letus.dto.MoverEvent;
+import com.letus.rutasservice.dto.MoverDTO;
 import com.letus.rutasservice.dto.RutaDTO;
 import com.letus.rutasservice.kafka.CheckpointProducer;
+import com.letus.rutasservice.kafka.MoverIniProducer;
 import com.letus.rutasservice.model.CheckPoint;
 import com.letus.rutasservice.service.RutaService;
 
@@ -25,6 +28,8 @@ public class RutaController {
 
     private CheckpointProducer checkpointProducer;
 
+    private MoverIniProducer moverIniProducer;
+
     @PostMapping("/create_test_ruta")
     public String testRuta(){
 
@@ -35,9 +40,16 @@ public class RutaController {
 
     
 
-    public RutaController(CheckpointProducer checkpointProducer) {
+    public RutaController(CheckpointProducer checkpointProducer, MoverIniProducer moverIniProducer) {
         this.checkpointProducer=checkpointProducer;
+        this.moverIniProducer = moverIniProducer;
     }
+    
+
+    
+
+
+
 
     @GetMapping("/get-rutas")
     public List<Object[]> getRutas() {
@@ -58,6 +70,14 @@ public class RutaController {
 
         return "Order placed successfully ...";
     }
+    @PostMapping("/mover-paquete")
+    public String moverPaqueteInicio (@RequestBody MoverDTO mover){
+       MoverEvent moverEvent = rutaService.moverPaquete(mover);
+       moverIniProducer.sendMessage(moverEvent);
+        return "Moved successfully ...";
+    }
+
+    
 
     // @PostMapping("/move_to_checkpoint")
     // public String moveToCheckpoint(){

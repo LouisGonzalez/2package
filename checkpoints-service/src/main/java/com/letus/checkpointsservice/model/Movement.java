@@ -31,6 +31,15 @@ public class Movement {
 
     @NotBlank
     private boolean sending;
+
+    public Movement(@NotBlank EStatus status, CheckPoint movCheckPoint, @NotBlank Paquete movPaquete,
+            @NotBlank Date date, @NotBlank boolean sending) {
+        this.status = status;
+        this.movCheckPoint = movCheckPoint;
+        this.movPaquete = movPaquete;
+        this.date = date;
+        this.sending = sending;
+    }
     
 
 

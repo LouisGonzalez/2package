@@ -1,4 +1,4 @@
-1) Enviar Paquete
+#1) Enviar Paquete
 paquetesService -> rutasService
 (String id, int packageId, int rutaId)
 
@@ -6,14 +6,14 @@ paquetesService -> rutasService
 2)Localizar Paquete
 usaurioService -> paquetesService -> rutasService
 
-3) Pagar Paquete
+#3) Pagar Paquete
 pagosService-> paquetesService (usuarioService)
 (int userId, int packageId, Float amount, Date date, Long cardNumber
     int cvv, String cardName, String expDate)
 
 
 
-4) Mover Paquete a CheckPoint Inicial
+#4) Mover Paquete a CheckPoint Inicial
 rutasService-> checkpointsService
 (int packageId)
 
@@ -21,7 +21,7 @@ rutasService-> checkpointsService
 usuario -> paquetesService
             rutasService
 
-6) Creacion de Ruta
+#6) Creacion de Ruta
 rutasService-> checkpointsService
 
 
