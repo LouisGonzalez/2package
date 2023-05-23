@@ -23,7 +23,35 @@ spring:
             - Path=/user/**
           filters:
             - AuthFilter
+
+
+
         - id: auth-service
           uri: lb://auth-service
           predicates:
             - Path=/auth/**            
+
+        - id: checkpoints-service
+          uri: lb://checkpoints-service
+          predicates:
+            - Path=/checkpoints/**
+
+        - id: pagos-service
+          uri: lb://pagos-service
+          predicates:
+            - Path=/pagos/**
+
+        - id: paquetes-service
+          uri: lb://paquetes-service
+          predicates:
+            - Path=/paquetes/**
+
+        - id: rutas-service
+          uri: lb://rutas-service
+          predicates:
+            - Path=/rutas/**
+
+        - id: usuarios-service
+          uri: lb://usuarios-service
+          predicates:
+            - Path=/usuarios/**

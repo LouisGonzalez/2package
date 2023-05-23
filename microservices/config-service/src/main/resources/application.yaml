@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: auth-service-prototype-luis
+          default-label: merge-events-auth-services
           uri: https://github.com/LouisGonzalez/2package
           search-paths: /microservices/config-data
   application:
