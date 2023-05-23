@@ -15,6 +15,7 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.letus.dto.CheckpointEvent;
 
@@ -27,7 +28,7 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.topic.name3}")
     private String topicName2;
 
-    @Value("${spring.kafka.producer.bootstrap-servers")
+    @Value("${spring.kafka.producer.bootstrap-servers}")
     private  String PORT;
 
 
@@ -43,7 +44,7 @@ public class KafkaTopicConfig {
                     StringSerializer.class);
             configProps.put(
                     ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                    StringSerializer.class);
+                    JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
         @Bean
@@ -58,7 +59,7 @@ public class KafkaTopicConfig {
                     StringSerializer.class);
             configProps.put(
                     ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                    StringSerializer.class);
+                    JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
 

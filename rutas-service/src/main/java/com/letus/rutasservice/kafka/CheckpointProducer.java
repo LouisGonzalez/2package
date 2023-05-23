@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -19,7 +20,8 @@ public class CheckpointProducer {
     private static final Logger LOGGER = LoggerFactory.getLogger(CheckpointProducer.class);
 
     private NewTopic topic;
-
+    @Value("${spring.kafka.topic.name3}")
+    private String topicName;
     @Autowired
     @Qualifier("checkpoints")
     private KafkaTemplate<String, CheckpointEvent> kafkaTemplate;
@@ -36,7 +38,7 @@ public class CheckpointProducer {
         // create Message
         Message<CheckpointEvent> message = MessageBuilder
                 .withPayload(event)
-                .setHeader(KafkaHeaders.TOPIC, topic.name())
+                .setHeader(KafkaHeaders.TOPIC, topicName)
                 .build();
         kafkaTemplate.send(message);
     }    

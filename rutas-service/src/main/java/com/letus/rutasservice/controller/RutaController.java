@@ -3,6 +3,7 @@ package com.letus.rutasservice.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.letus.dto.Checkpoint;
 import com.letus.dto.CheckpointEvent;
 import com.letus.rutasservice.dto.RutaDTO;
 import com.letus.rutasservice.kafka.CheckpointProducer;
@@ -52,7 +53,7 @@ public class RutaController {
         checkpointEvent.setStatus("PENDING");
         checkpointEvent.setMessage("order status is in pending state");
         checkpointEvent.setCheckpoints(rutaService.createList(oldChecks, ruta));
-
+        //checkpointEvent.setCheckpoints(new Checkpoint(1,"name","add"));
         checkpointProducer.sendMessage(checkpointEvent);
 
         return "Order placed successfully ...";

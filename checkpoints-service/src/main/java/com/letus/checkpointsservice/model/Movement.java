@@ -12,14 +12,19 @@ public class Movement {
     private Long id;
 
     @NotBlank
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private EStatus status;
 
-    @NotBlank
-    private Paquete paquete;
+    @ManyToOne
+    @JoinColumn(name="movCheckPoint", nullable=false)
+    private CheckPoint movCheckPoint;
 
     @NotBlank
-    private CheckPoint checkPoint;
+    @ManyToOne
+    @JoinColumn(name="movPaquete", nullable=false)
+    private Paquete movPaquete;
+
+
 
     @NotBlank
     private Date date;
