@@ -36,6 +36,14 @@ public class Paquete {
         this.checkPoint = checkPoint;
     }
 
+    public int getNexPointId() {
+        return nexPointId;
+    }
+
+    public void setCheckPoint(CheckPoint checkPoint) {
+        this.checkPoint = checkPoint;
+    }
+
 
     
 }   

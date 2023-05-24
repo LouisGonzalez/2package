@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.letus.checkpointsservice.dto.MoverDTO;
 import com.letus.checkpointsservice.model.CheckPoint;
 import com.letus.checkpointsservice.model.EStatus;
 import com.letus.checkpointsservice.model.Movement;
@@ -13,10 +14,11 @@ import com.letus.checkpointsservice.repository.CheckpointRepository;
 import com.letus.checkpointsservice.repository.MovementRepository;
 import com.letus.checkpointsservice.repository.PaqueteRepository;
 import com.letus.dto.Checkpoint;
+import com.letus.dto.MoverCheckEvent;
 import com.letus.dto.MoverEvent;
 
 @Service
-public class CheckpointService {
+public class    CheckpointService {
     @Autowired
     CheckpointRepository checkpointRepository;
 
@@ -46,6 +48,23 @@ public class CheckpointService {
         paqueteRepository.save(paquete);
         movementRepository.save(movement);
 
+     }
+
+     public MoverCheckEvent moverCheck(MoverDTO mover){
+        Paquete paquete = paqueteRepository.findById((long)mover.getPackageId())
+        .orElseThrow(() -> new RuntimeException("Error: Checkpoint not found "+mover.getPackageId()));
+        CheckPoint checkPoint = checkpointRepository.findById(paquete.getNexPointId())
+        .orElseThrow(() -> new RuntimeException("Error: Checkpoint not found "+paquete.getNexPointId()));
+        paquete.setCheckPoint(checkPoint);
+        Movement movement = new Movement(EStatus.PENDING, checkPoint, paquete, mover.getDate(), true);
+        paqueteRepository.save(paquete);
+        movementRepository.save(movement);
+        MoverCheckEvent event = new MoverCheckEvent();
+        event.setStatus("PENDING");
+        event.setMessage("order status is in pending state");
+        event.setPackageId(mover.getPackageId());
+        event.setCheckPointId(paquete.getNexPointId());
+        return event;
      }
 
 }

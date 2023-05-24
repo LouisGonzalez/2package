@@ -3,7 +3,6 @@ package com.letus.rutasservice.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.letus.dto.Checkpoint;
 import com.letus.dto.CheckpointEvent;
 import com.letus.dto.MoverEvent;
 import com.letus.rutasservice.dto.MoverDTO;

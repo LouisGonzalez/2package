@@ -30,7 +30,7 @@ public class Ruta {
     private int numberOfDays;
 
 
-    @OneToMany(mappedBy = "ruta")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "ruta")
 	List<CheckPoint> checkpoints;
 
     @OneToMany(mappedBy = "ruta")
@@ -127,7 +127,14 @@ public class Ruta {
         }
     }
     
-    
+    public int findCheckpoint(int idCheckpoint){
+        for (int i = 0; i < checkpoints.size(); i++) {
+            if(checkpoints.get(i).getId()==idCheckpoint){
+                return i+1;
+            }
+        }
+        return 0;
+    }
 
     
     

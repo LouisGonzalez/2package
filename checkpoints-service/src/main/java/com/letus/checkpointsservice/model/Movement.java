@@ -40,6 +40,9 @@ public class Movement {
         this.date = date;
         this.sending = sending;
     }
+
+    public Movement() {
+    }
     
 
 
