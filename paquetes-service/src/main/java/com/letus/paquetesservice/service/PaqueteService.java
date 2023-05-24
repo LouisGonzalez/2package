@@ -39,7 +39,7 @@ public class PaqueteService {
         paqueteRepository.save(paquete);
     }
     public void createPackage(PagoEvent pagoEvent){
-        Paquete paquete= new Paquete(pagoEvent.getPago().getUserId(),"PAID");
+        Paquete paquete= new Paquete((long)pagoEvent.getPago().getPackageId(),pagoEvent.getPago().getUserId(),"PAID");
         paqueteRepository.save(paquete);
     }
     public List<Paquete> getPackages() {

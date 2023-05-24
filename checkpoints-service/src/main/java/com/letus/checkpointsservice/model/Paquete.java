@@ -29,6 +29,10 @@ public class Paquete {
     public Paquete() {
     }
 
+    public void setNexPointId(int nexPointId) {
+        this.nexPointId = nexPointId;
+    }
+
     public Paquete(Long id, int nexPointId, @NotBlank int idDestination, CheckPoint checkPoint) {
         this.id = id;
         this.nexPointId = nexPointId;

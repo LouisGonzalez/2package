@@ -126,6 +126,7 @@ public class Ruta {
             return checkpoints.get(num+1).getId().intValue();
         }
     }
+
     
     public int findCheckpoint(int idCheckpoint){
         for (int i = 0; i < checkpoints.size(); i++) {

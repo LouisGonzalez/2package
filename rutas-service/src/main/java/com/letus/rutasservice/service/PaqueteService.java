@@ -60,4 +60,12 @@ public class PaqueteService {
         }
         return paquetes;
     }
+
+    public int getNext(int packageId, int checkPointId) {
+        Paquete paquete= paqueteRepository.findById((long)packageId)
+            .orElseThrow(() -> new RuntimeException("Error: Paquete not found"));
+            Ruta ruta = paquete.getRuta();
+        int nextId= ruta.getNextId(ruta.findCheckpoint(checkPointId));
+        return nextId;
+    }
 }
