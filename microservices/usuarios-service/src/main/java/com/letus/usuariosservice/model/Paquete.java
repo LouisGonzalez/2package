@@ -40,6 +40,15 @@ public class Paquete {
         return usuario;
     }
 
+    public Paquete(Long id, @NotBlank EState state, Usuario usuario) {
+        this.id = id;
+        this.state = state;
+        this.usuario = usuario;
+    }
+
+    public Paquete() {
+    }
+
     
 
 }

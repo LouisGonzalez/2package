@@ -21,6 +21,7 @@ import com.letus.dto.MoverCheckEvent;
 import com.letus.dto.MoverEvent;
 import com.letus.dto.RecSiguienteEvent;
 import com.letus.dto.RecibirCheckEvent;
+import com.letus.dto.SiguienteEvent;
 
 @Service
 public class CheckpointService {
@@ -102,5 +103,13 @@ public class CheckpointService {
             sigueinteProducer.sendMessage(event);
         }
 
+    }
+
+    public void setNext(SiguienteEvent event) {
+        Paquete paquete = paqueteRepository.findById((long) event.getPackageId())
+                .orElseThrow(() -> new RuntimeException("Error: Checkpoint not found " + event.getPackageId()));
+        paquete.setNexPointId(event.getNextCheckpoint());
+        paqueteRepository.save(paquete);
+       
     }
 }

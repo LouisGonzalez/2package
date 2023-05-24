@@ -19,6 +19,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.letus.dto.CheckpointEvent;
 import com.letus.dto.MoverEvent;
+import com.letus.dto.SiguienteEvent;
 
 @Configuration
 public class KafkaTopicConfig {
@@ -63,6 +64,21 @@ public class KafkaTopicConfig {
                     JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
+        @Bean
+        public ProducerFactory<String, SiguienteEvent> siguienteProducerFactory() {
+
+            HashMap<String, Object> configProps = new HashMap<String, Object>();
+            configProps.put(
+                    ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                    PORT);
+            configProps.put(
+                    ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                    StringSerializer.class);
+            configProps.put(
+                    ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                    JsonSerializer.class);
+            return new DefaultKafkaProducerFactory<>(configProps);
+        }
 
         @Bean(name = "checkpoints")
         public KafkaTemplate<String, CheckpointEvent> checkpointKafkaTemplate() {
@@ -72,6 +88,11 @@ public class KafkaTopicConfig {
         @Bean(name = "mover")
         public KafkaTemplate<String, MoverEvent> clouderaKafkaTemplate() {
             return new KafkaTemplate<>(cloudraProducerFactory());
+        }
+
+        @Bean(name = "siguiente")
+        public KafkaTemplate<String, SiguienteEvent> siguienteKafkaTemplate() {
+            return new KafkaTemplate<>(siguienteProducerFactory());
         }
     // spring bean for kafka topic
     @Bean

@@ -1,6 +1,9 @@
 package com.letus.usuariosservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,11 @@ public class UsuarioController {
     public String testRuta(@RequestBody UserDTO userDTO){
         usuarioService.createUser(userDTO);
         return "Created User";
+    }
+
+    @GetMapping("/get-users")
+    public List<Object[]> getUsers() {
+        return usuarioService.getUsers();
     }
 
     @PostMapping("/recibir-paquete")

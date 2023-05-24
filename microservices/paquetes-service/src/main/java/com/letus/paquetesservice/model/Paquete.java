@@ -10,7 +10,6 @@ import jakarta.persistence.Table;
 @Table(name = "paquetes")
 public class Paquete {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
     
@@ -43,7 +42,8 @@ public class Paquete {
         this.rutaId = rutaId;
         this.status = status;
     }
-    public Paquete(int userId, String status) {
+    public Paquete(Long id, int userId, String status) {
+        this.id=id;
         this.userId = userId;
         this.status = status;
     }

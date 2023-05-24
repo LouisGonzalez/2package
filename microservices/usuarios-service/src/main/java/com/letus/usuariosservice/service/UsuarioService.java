@@ -1,5 +1,7 @@
 package com.letus.usuariosservice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ public class UsuarioService {
         user.getPhoneNumber(), user.getAddress());
 
         usuarioRepository.save(usuario);
+    }
+
+    public List<Object[]> getUsers() {
+        return usuarioRepository.findAllUsuarios();
     }
 
     
