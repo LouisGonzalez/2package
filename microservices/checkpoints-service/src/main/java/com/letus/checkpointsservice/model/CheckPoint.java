@@ -23,6 +23,9 @@ public class CheckPoint {
     @OneToMany(mappedBy = "checkPoint")
 	Set<Paquete> paquetes;
 
+    @OneToMany(mappedBy = "movCheckPoint")
+    Set<Movement> movements;
+
     public CheckPoint(Long id, @NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 150) String address) {
         this.id = id;
         this.name = name;

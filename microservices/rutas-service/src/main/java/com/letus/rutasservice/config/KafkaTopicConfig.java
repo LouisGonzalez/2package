@@ -15,8 +15,10 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.letus.dto.CheckpointEvent;
+import com.letus.dto.MoverEvent;
 
 @Configuration
 public class KafkaTopicConfig {
@@ -27,7 +29,7 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.topic.name3}")
     private String topicName2;
 
-    @Value("${spring.kafka.producer.bootstrap-servers")
+    @Value("${spring.kafka.producer.bootstrap-servers}")
     private  String PORT;
 
 
@@ -43,11 +45,11 @@ public class KafkaTopicConfig {
                     StringSerializer.class);
             configProps.put(
                     ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                    StringSerializer.class);
+                    JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
         @Bean
-        public ProducerFactory<String, String> cloudraProducerFactory() {
+        public ProducerFactory<String, MoverEvent> cloudraProducerFactory() {
 
             HashMap<String, Object> configProps = new HashMap<String, Object>();
             configProps.put(
@@ -58,7 +60,7 @@ public class KafkaTopicConfig {
                     StringSerializer.class);
             configProps.put(
                     ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                    StringSerializer.class);
+                    JsonSerializer.class);
             return new DefaultKafkaProducerFactory<>(configProps);
         }
 
@@ -67,8 +69,8 @@ public class KafkaTopicConfig {
             return new KafkaTemplate<>(checkpointProducerFactory());
         }
 
-        @Bean(name = "cloudera")
-        public KafkaTemplate<String, String> clouderaKafkaTemplate() {
+        @Bean(name = "mover")
+        public KafkaTemplate<String, MoverEvent> clouderaKafkaTemplate() {
             return new KafkaTemplate<>(cloudraProducerFactory());
         }
     // spring bean for kafka topic

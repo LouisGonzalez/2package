@@ -12,20 +12,37 @@ public class Movement {
     private Long id;
 
     @NotBlank
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
     private EStatus status;
 
-    @NotBlank
-    private Paquete paquete;
+    @ManyToOne
+    @JoinColumn(name="movCheckPoint", nullable=false)
+    private CheckPoint movCheckPoint;
 
     @NotBlank
-    private CheckPoint checkPoint;
+    @ManyToOne
+    @JoinColumn(name="movPaquete", nullable=false)
+    private Paquete movPaquete;
+
+
 
     @NotBlank
     private Date date;
 
     @NotBlank
     private boolean sending;
+
+    public Movement(@NotBlank EStatus status, CheckPoint movCheckPoint, @NotBlank Paquete movPaquete,
+            @NotBlank Date date, @NotBlank boolean sending) {
+        this.status = status;
+        this.movCheckPoint = movCheckPoint;
+        this.movPaquete = movPaquete;
+        this.date = date;
+        this.sending = sending;
+    }
+
+    public Movement() {
+    }
     
 
 

@@ -9,7 +9,7 @@ import com.letus.rutasservice.model.Paquete;
 
 @Repository
 public interface PaqueteRepository extends  JpaRepository<Paquete, Long>{
-    Optional<Paquete> findById(int id);
+    Optional<Paquete> findById(Long id);
 	Boolean existsByid(String id);
 }
     
