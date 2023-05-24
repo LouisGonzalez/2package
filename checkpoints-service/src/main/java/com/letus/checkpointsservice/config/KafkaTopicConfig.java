@@ -18,7 +18,8 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.letus.dto.MoverCheckEvent;
-import com.letus.dto.MoverEvent;
+import com.letus.dto.RecSiguienteEvent;
+import com.letus.dto.RecibirCheckEvent;
 
 @Configuration
 public class KafkaTopicConfig {
@@ -26,8 +27,11 @@ public class KafkaTopicConfig {
     @Value("${spring.kafka.topic.name3}")
     private String topicName;
 
-    @Value("${spring.kafka.topic.name3}")
+    @Value("${spring.kafka.topic.name4}")
     private String topicName2;
+
+    @Value("${spring.kafka.topic.name5}")
+    private String topicName3;
 
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private  String PORT;
@@ -49,7 +53,22 @@ public class KafkaTopicConfig {
             return new DefaultKafkaProducerFactory<>(configProps);
         }
         @Bean
-        public ProducerFactory<String, MoverEvent> cloudraProducerFactory() {
+        public ProducerFactory<String, RecibirCheckEvent> recibirProducerFactory() {
+
+            HashMap<String, Object> configProps = new HashMap<String, Object>();
+            configProps.put(
+                    ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
+                    PORT);
+            configProps.put(
+                    ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
+                    StringSerializer.class);
+            configProps.put(
+                    ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
+                    JsonSerializer.class);
+            return new DefaultKafkaProducerFactory<>(configProps);
+        }
+        @Bean
+        public ProducerFactory<String, RecSiguienteEvent> siguienteProducerFactory() {
 
             HashMap<String, Object> configProps = new HashMap<String, Object>();
             configProps.put(
@@ -69,9 +88,14 @@ public class KafkaTopicConfig {
             return new KafkaTemplate<>(checkpointProducerFactory());
         }
 
-        @Bean(name = "recibe")
-        public KafkaTemplate<String, MoverEvent> clouderaKafkaTemplate() {
-            return new KafkaTemplate<>(cloudraProducerFactory());
+        @Bean(name = "recibir")
+        public KafkaTemplate<String, RecibirCheckEvent> recibirKafkaTemplate() {
+            return new KafkaTemplate<>(recibirProducerFactory());
+        }
+
+        @Bean(name = "siguiente")
+        public KafkaTemplate<String, RecSiguienteEvent> siguienteKafkaTemplate() {
+            return new KafkaTemplate<>(siguienteProducerFactory());
         }
     // spring bean for kafka topic
     @Bean
@@ -83,6 +107,11 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic topic2(){
         return TopicBuilder.name(topicName2)
+                .build();
+    }
+    @Bean
+    public NewTopic topic3(){
+        return TopicBuilder.name(topicName3)
                 .build();
     }
 

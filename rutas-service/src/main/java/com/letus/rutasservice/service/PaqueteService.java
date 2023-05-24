@@ -1,9 +1,13 @@
 package com.letus.rutasservice.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.letus.dto.Envio;
+import com.letus.rutasservice.dto.PaqueteColaResponse;
 import com.letus.rutasservice.model.Paquete;
 import com.letus.rutasservice.model.Ruta;
 import com.letus.rutasservice.repository.PaqueteRepository;
@@ -42,5 +46,18 @@ public class PaqueteService {
             paquete.setCheckpointNumberLocation(place);
             paqueteRepository.save(paquete);
         }
+    }
+
+    public List<PaqueteColaResponse> getPaqueteCola(){
+        List<PaqueteColaResponse> paquetes= new ArrayList<PaqueteColaResponse>();
+        List<Paquete> allPaquets=paqueteRepository.findAll();
+        for (Paquete pa : allPaquets) {
+            if (pa.getCheckpointNumberLocation()==0) {
+
+                paquetes.add(new PaqueteColaResponse(pa.getId().intValue(), pa.getRuta().getId().intValue(),pa.getRuta().getFinish()));
+            }
+            
+        }
+        return paquetes;
     }
 }

@@ -10,11 +10,13 @@ import com.letus.rutasservice.dto.RutaDTO;
 import com.letus.rutasservice.kafka.CheckpointProducer;
 import com.letus.rutasservice.kafka.MoverIniProducer;
 import com.letus.rutasservice.model.CheckPoint;
+import com.letus.rutasservice.service.PaqueteService;
 import com.letus.rutasservice.service.RutaService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +26,8 @@ public class RutaController {
 
     @Autowired
     RutaService rutaService;
+    @Autowired
+    PaqueteService paqueteService;
 
     private CheckpointProducer checkpointProducer;
 
@@ -45,7 +49,10 @@ public class RutaController {
     }
     
 
-    
+    @GetMapping("/get-en-cola")
+    public ResponseEntity<?> getPaquetesEnCola() {
+        return ResponseEntity.ok(paqueteService.getPaqueteCola());
+    }
 
 
 

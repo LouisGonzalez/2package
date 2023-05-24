@@ -44,6 +44,10 @@ public class Paquete {
         this.checkPoint = checkPoint;
     }
 
+    public int getIdDestination() {
+        return idDestination;
+    }
+
 
     
 }   

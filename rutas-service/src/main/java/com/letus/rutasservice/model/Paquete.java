@@ -23,7 +23,7 @@ public class Paquete {
         this.ruta = ruta;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ruta", nullable=true)
     private Ruta ruta;
 
